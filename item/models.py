@@ -12,7 +12,7 @@ class Item(models.Model):
     description = models.TextField()
     price = models.IntegerField(default=0)
     image = models.ImageField(upload_to='uploads/item_images/')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, related_name='items', on_delete=models.CASCADE)
 
 class UserItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
