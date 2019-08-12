@@ -1,20 +1,19 @@
 from rest_framework import serializers
-from .models import Item, UserItem, Category
 
+from .models import Item, UserItem, Category
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ['id', 'title']
 
-
 class ItemSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(read_only=True)
-    category_id = serializers.IntegerField(write_only=True)
-
+    category = CategorySerializer()
     class Meta:
+
         model = Item
-        fields = ['id', 'title', 'description', 'price', 'image', 'category', 'category_id' ]
+        fields = ['id', 'title', 'description', 'created', 'price', 'image', 'category']
+
 
 class UserItemSerializer(serializers.ModelSerializer):
     item = ItemSerializer()
